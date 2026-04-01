@@ -1,0 +1,9 @@
+/init
+
+---
+
+Your understanding of codebase is correct, but now I want you to do some refactoring. In particular, I want you to replace all "session_scribe" with new name of "agenda_manager", another is to replace all "strategic_planner" with "exploration_planner". This goes to the documentations in the README as well.
+
+---
+
+I just realized, don't change the `baselines` folder, only the others. Can you revert all the sed changes to earlier version and then only apply to src folder, scripts, or any, as long as you don't touch `baselines` folder?

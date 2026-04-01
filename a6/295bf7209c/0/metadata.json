@@ -1,0 +1,52 @@
+{
+  "cli_version": "0.5.1",
+  "checkpoint_id": "a6295bf7209c",
+  "session_id": "2dbbfc2d-1723-4686-8fbf-edc9313d6bb3",
+  "strategy": "manual-commit",
+  "created_at": "2026-04-01T04:17:44.523667584Z",
+  "branch": "main",
+  "checkpoints_count": 2,
+  "files_touched": [
+    ".env_sample",
+    "README.md",
+    "evaluation/eval_emergence_coverage.py",
+    "scripts/web_interview/quick_deploy.sh",
+    "src/agents/interviewer/interviewer.py",
+    "src/agents/interviewer/prompts.py",
+    "src/agents/session_scribe/prompts.py",
+    "src/agents/session_scribe/session_scribe.py",
+    "src/agents/session_scribe/tools.py",
+    "src/agents/shared/memory_tools.py",
+    "src/agents/shared/note_tools.py",
+    "src/agents/strategic_planner/__init__.py",
+    "src/agents/strategic_planner/prompts.py",
+    "src/agents/strategic_planner/strategic_planner.py",
+    "src/agents/strategic_planner/strategic_state.py",
+    "src/agents/strategic_planner/tools.py",
+    "src/content/session_agenda/session_agenda.py",
+    "src/content/session_agenda/topic_evaluator.py",
+    "src/interview_session/interview_session.py"
+  ],
+  "agent": "Claude Code",
+  "model": "claude-sonnet-4-6",
+  "turn_id": "49e10cb4f2a9",
+  "token_usage": {
+    "input_tokens": 23,
+    "cache_creation_tokens": 31193,
+    "cache_read_tokens": 551336,
+    "output_tokens": 8960,
+    "api_call_count": 17
+  },
+  "session_metrics": {
+    "turn_count": 2
+  },
+  "initial_attribution": {
+    "calculated_at": "2026-04-01T04:17:44.356461415Z",
+    "agent_lines": 0,
+    "human_added": 0,
+    "human_modified": 4490,
+    "human_removed": 1265,
+    "total_committed": 0,
+    "agent_percentage": 0
+  }
+}
