@@ -1,19 +1,19 @@
 import os
 import re
-from typing import TYPE_CHECKING, TypedDict, Tuple
+from typing import TYPE_CHECKING, TypedDict
 
-import json
+
 
 from src.agents.base_agent import BaseAgent
 from src.agents.interviewer.prompts import get_prompt
-from src.agents.interviewer.tools import EndConversation, RespondToUser
+from src.agents.interviewer.tools import RespondToUser
 from src.agents.shared.memory_tools import Recall
 from src.utils.llm.prompt_utils import format_prompt
 from src.interview_session.session_models import Participant, Message
-from src.utils.llm.xml_formatter import parse_rubric_call
+
 from src.utils.logger.session_logger import SessionLogger
 from src.utils.constants.colors import GREEN, RESET
-from src.content.question_bank.question import Rubric
+
 
 if TYPE_CHECKING:
     from src.interview_session.interview_session import InterviewSession
@@ -57,78 +57,18 @@ class Interviewer(BaseAgent, Participant):
                 on_turn_complete=lambda: setattr(
                     self, '_turn_to_respond', False)
             ),
-            # "end_conversation": EndConversation(
-            #     on_goodbye=lambda goodbye: (
-            #         self.add_event(sender=self.name,
-            #                        tag="goodbye", content=goodbye),
-            #         self.interview_session.add_message_to_chat_history(
-            #             role=self.title, content=goodbye)
-            #     ),
-            #     on_end=lambda: (
-            #         setattr(self, '_turn_to_respond', False),
-            #         self.interview_session.end_session()
-            #     )
-            # )
         }
 
         self._turn_to_respond = False
 
-    def _handle_quantify_response(self, quantified_response: str,
-                                  original_response: str) -> Tuple[str, Rubric]:
-        # 2. Parse the <tool_calls> block from the response
-        final_question_text = original_response
-        final_rubric = None
-        try:
-            parsed_calls = parse_rubric_call(quantified_response)
-            for parsed_call in parsed_calls:
-                is_quantifiable = str(parsed_call.get('quantifiable', 'false')).lower() == 'true'
-
-                if is_quantifiable:
-                    final_question_text = parsed_call.get('question', original_response)
-                    rubric_data_str = parsed_call.get('rubric')
-                    if rubric_data_str and isinstance(rubric_data_str, str):
-                        # The rubric might be a string representation of JSON
-                        try:
-                            rubric_data = json.loads(rubric_data_str)
-                            final_rubric = Rubric(**rubric_data) # Need to be in string
-                        except json.JSONDecodeError:
-                            SessionLogger.log_to_file(
-                                "execution_log",
-                                f"Could not parse rubric JSON string: {rubric_data_str}",
-                                log_level="warning"
-                            )
-                    elif isinstance(rubric_data_str, dict): # Sometimes it's already a dict
-                        final_rubric = Rubric(**rubric_data_str) # Need to be in string
-
-        except Exception as e:
-            # If parsing fails for any reason, log it but fall back gracefully
-            SessionLogger.log_to_file(
-                "execution_log",
-                f"Could not parse rubric response: {e}. Using original question.",
-                log_level="warning"
-            )
-            final_question_text = original_response
-            final_rubric = None
-
-        return final_question_text, final_rubric
-
     async def _handle_response(self, response: str, subtopic_id: str = "") -> str:
-        """Handle responses from the RespondToUser tool by quantifying it and adding them to chat history.
+        """Handle responses from the RespondToUser tool and adding them to chat history.
         
         Args:
             response: The response text to add to chat history
             topic_id: The topic ID of the response
             subtopic_id: The subtopic ID of the response
         """
-        # # Quantify question even further
-        # quantify_prompt = format_prompt(get_prompt("quantify_question"), {"question_text": response})
-        # self.add_event(sender=self.name, tag="llm_prompt", content=quantify_prompt)
-        # quantified_response = await self.call_engine_async(quantify_prompt)
-        # print(f"{GREEN}Interviewer Quantified:\n{quantified_response}{RESET}")
-        # quantified_question, rubric = self._handle_quantify_response(quantified_response=quantified_response,
-        #                                                              original_response=response)
-        
-        # If we disable quantification
         quantified_question = response
         rubric = None
         
@@ -208,10 +148,6 @@ class Interviewer(BaseAgent, Participant):
 
         # Start with all available tools
         tools_set = set(self.tools.keys())
-        
-        # if self.interview_session.api_participant:
-        #     # Don't end_conversation directly if API participant is present
-        #     tools_set.discard("end_conversation")
         
         if self.use_baseline:
             # For baseline mode, remove recall tool
