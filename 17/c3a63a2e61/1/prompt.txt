@@ -1,0 +1,9 @@
+What was last conversation we had? Was it about refactoring dead code
+
+---
+
+How do I load previous conversation context?
+
+---
+
+claude --resume
