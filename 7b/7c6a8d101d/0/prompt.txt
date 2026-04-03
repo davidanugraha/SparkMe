@@ -1,0 +1,94 @@
+/init
+
+---
+
+Your understanding of codebase is correct, but now I want you to do some refactoring. In particular, I want you to replace all "session_scribe" with new name of "agenda_manager", another is to replace all "strategic_planner" with "exploration_planner". This goes to the documentations in the README as well.
+
+---
+
+I just realized, don't change the `baselines` folder, only the others. Can you revert all the sed changes to earlier version and then only apply to src folder, scripts, or any, as long as you don't touch `baselines` folder?
+
+---
+
+Can you prune down the codes that seem not used? For example, I believe SparkMe/src/interview_session/prompts is not used at all? Similarly with SparkMe/src/agents/report_team, but I believe this requires some modifications to the code where I need to change in some parts. I was also wondering if this is better to be removed because initially it would be nice to have some reports being written. But after thinking about it, having report in markdown format might not be great to preprocess; rather something like JSON would be nice given our structure. At the same time, it's probably better to post-process it later instead (future work of custom post-processing, no need to work on it). But anyway, what do you think first?
+
+---
+
+Let's remove it so the codebase is simpler and more manageable
+
+---
+
+Hmm upon inspection, I don't think AddInterviewQuestion is being used as part of the tools for agenda manager, can you look into it? _propose_followups are not being used at all in the current code functionality?
+
+---
+
+Yep, let's remove all useless code
+
+---
+
+Seems like it's hanging, maybe to redo the simpler tasks first by removing folders/files that are obviously deprecated?
+
+---
+
+Yeah let's remove all the dead dependencies, it's so that I can manage the tools easier as well
+
+---
+
+I just realized, why  - _locked_update_list_of_subtopics method
+  - _locked_identify_emergent_insights method are removed? Can you explain again?
+
+---
+
+Hmm yeah can remove, I believe identifying emergent insights are in exploration_planner, but maybe you can clarify that
+
+---
+
+Are you sure the tools are not called? Remember that tools.py may only need the string name?
+
+---
+
+I think the right question is that, was previously called? It may not seem to be "called" but if it refers to the tool here then the agent may  have an option to call such tool
+
+---
+
+Go ahead then yeah
+
+---
+
+Done, I removed it manulaly
+
+---
+
+Alright, any other code to be cleaned? Same thing maybe consider looking at prompts and tools. Suggest them first so I can look into it.
+
+---
+
+I see, maybe also consider other agents? Check if they have dead code?
+
+---
+
+Yeah maybe remove all these
+
+---
+
+Can you check why it's erroring out? I tried checking the file seems okay? Also continue cleaning dead code please
+
+---
+
+I wanna hear from you, is there anything else you can think off so we can start on developing new features, or maybe review the current codebase of what kind of improvements can be made? After that I can tell you my plan if there is anything urgent.
+
+---
+
+We can remove rubrics first then, for (1), (2), and (5) I am not sure what kind of actionable items you have? For 4 I think we can leave that for now.
+
+---
+
+I believe for the other parts (i.e. the async bug) have you fixed them?
+
+---
+
+Alright, let's now focus on the main interviewer features, I feel like one of the things that keep getting question with is the fact that it always has duplicated question; maybe we can get history of questions asked and just remind the interviewer agent so that it shouldn't ask too similar questions, or perhaps rephrase it if it's too similar. Similar with how emergent insights being added shouldn't be similar to the current subtopics in the agenda. What do you think? Can you do both in one go?
+
+---
+
+Did it cut out? Can you resume your planning

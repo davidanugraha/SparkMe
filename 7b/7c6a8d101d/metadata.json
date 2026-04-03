@@ -1,0 +1,38 @@
+{
+  "cli_version": "0.5.1",
+  "checkpoint_id": "7b7c6a8d101d",
+  "strategy": "manual-commit",
+  "branch": "main",
+  "checkpoints_count": 4,
+  "files_touched": [
+    "src/agents/agenda_manager/agenda_manager.py",
+    "src/agents/base_agent.py",
+    "src/agents/exploration_planner/exploration_planner.py",
+    "src/agents/interviewer/interviewer.py",
+    "src/content/question_bank/question.py",
+    "src/content/question_bank/question_bank_base.py",
+    "src/content/question_bank/question_bank_vector_db.py",
+    "src/content/report/report.py",
+    "src/content/report/report_styles.py",
+    "src/content/session_agenda/core_topic.py",
+    "src/content/session_agenda/interview_topic_manager.py",
+    "src/content/session_agenda/session_agenda.py",
+    "src/interview_session/interview_session.py",
+    "src/utils/llm/xml_formatter.py"
+  ],
+  "sessions": [
+    {
+      "metadata": "/7b/7c6a8d101d/0/metadata.json",
+      "transcript": "/7b/7c6a8d101d/0/full.jsonl",
+      "content_hash": "/7b/7c6a8d101d/0/content_hash.txt",
+      "prompt": "/7b/7c6a8d101d/0/prompt.txt"
+    }
+  ],
+  "token_usage": {
+    "input_tokens": 356,
+    "cache_creation_tokens": 1879559,
+    "cache_read_tokens": 28244471,
+    "output_tokens": 115786,
+    "api_call_count": 295
+  }
+}
