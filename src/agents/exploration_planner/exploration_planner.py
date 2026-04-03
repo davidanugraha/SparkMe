@@ -107,6 +107,10 @@ class ExplorationPlanner(BaseAgent, Participant):
         self._planning_lock = asyncio.Lock()
         self._last_planning_turn = 0
 
+    @property
+    def processing_in_progress(self) -> bool:
+        return self._planning_in_progress
+
         # Initialize tools
         self.tools = {
             "suggest_strategic_questions": SuggestStrategicQuestions(
@@ -298,7 +302,7 @@ class ExplorationPlanner(BaseAgent, Participant):
         except (json.JSONDecodeError, ValueError) as e:
             SessionLogger.log_to_file(
                 "execution_log",
-                f"({self.name}) Error parsing rollout JSON: {e}",
+                f"({self.name}) Error parsing rollout JSON: {e}. Raw response (first 500 chars): {response[:500]}",
                 log_level="error"
             )
             return []
@@ -359,7 +363,7 @@ class ExplorationPlanner(BaseAgent, Participant):
         except (json.JSONDecodeError, ValueError, KeyError) as e:
             SessionLogger.log_to_file(
                 "execution_log",
-                f"({self.name}) Error parsing coverage judgment JSON: {e}",
+                f"({self.name}) Error parsing coverage judgment JSON: {e}. Raw response (first 500 chars): {response[:500]}",
                 log_level="error"
             )
             return []
