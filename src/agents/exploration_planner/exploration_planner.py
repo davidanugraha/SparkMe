@@ -107,10 +107,6 @@ class ExplorationPlanner(BaseAgent, Participant):
         self._planning_lock = asyncio.Lock()
         self._last_planning_turn = 0
 
-    @property
-    def processing_in_progress(self) -> bool:
-        return self._planning_in_progress
-
         # Initialize tools
         self.tools = {
             "suggest_strategic_questions": SuggestStrategicQuestions(
@@ -127,6 +123,10 @@ class ExplorationPlanner(BaseAgent, Participant):
                 min_novelty_score=3
             ),
         }
+
+    @property
+    def processing_in_progress(self) -> bool:
+        return self._planning_in_progress
 
     async def on_message(self, message: Message):
         """
