@@ -1,0 +1,11 @@
+{
+  "id": "grounded_follow_up",
+  "description": "The interviewer follows up on specific details in the participant's preceding response, eliciting clarification or deeper explanation.",
+  "positive_evidence": ["Asks about a concrete event just mentioned", "Explores a participant's explanation"],
+  "negative_evidence": ["Substitutes an unsupported assumption for the participant's account", "Misses a clear opportunity to explore a relevant experience"],
+  "rubric": {
+    "min_score": 1,
+    "max_score": 5,
+    "description": "1: rarely grounded; 2: mostly generic or assumptive; 3: a mixture of grounded follow-ups and missed opportunities; 4: usually grounded with minor gaps; 5: consistently grounded and explores relevant details. Judge the whole transcript, not just selected examples."
+  }
+}

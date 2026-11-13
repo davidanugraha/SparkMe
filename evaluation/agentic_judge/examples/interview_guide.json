@@ -1,0 +1,28 @@
+{
+  "title": "AI at work interview information requirements",
+  "items": [
+    {
+      "id": "role",
+      "description": "Establish the participant's role and core responsibilities.",
+      "required": true
+    },
+    {
+      "id": "ai_example",
+      "description": "Obtain a concrete example of the participant's own AI use and what happened, including its outcome or limitations.",
+      "required": true,
+      "grounding": "first_hand",
+      "condition": "Applies when the participant has used AI at work. An explicit account of no AI use is a legitimate exception."
+    },
+    {
+      "id": "verification",
+      "description": "Establish whether and how the participant verifies AI output. An explicit statement that they do not verify it can resolve this requirement.",
+      "required": true,
+      "condition": "Applies when the participant has used AI at work."
+    },
+    {
+      "id": "future_needs",
+      "description": "Explore future AI capabilities the participant would find useful.",
+      "required": false
+    }
+  ]
+}

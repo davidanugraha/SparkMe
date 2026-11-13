@@ -1,0 +1,8 @@
+-r requirements.txt
+# Install separately from SparkMe's historical dependency pins.
+qwen-agent==0.0.34
+# Imports used by this Qwen-Agent version beyond its declared core dependencies.
+soundfile>=0.12,<1
+python-dateutil>=2.8,<4
+# Match the transport family used in the integration test.
+dashscope==1.27.8

@@ -1,0 +1,10 @@
+Researcher: Tell me about using AI at work.
+Worker: I used a chatbot to draft a client email last week, but it invented a delivery date.
+Researcher: What did you do when you noticed that invented date?
+Worker: I checked our order system, corrected the email, and decided to verify future drafts.
+Researcher: You obviously trust AI completely now, right?
+Worker: No, I still check facts before sending anything.
+Researcher: What specifically do you check before sending a draft?
+Worker: Dates, prices, and anything promising something to a client.
+Researcher: What is your job title?
+Worker: Account coordinator.
